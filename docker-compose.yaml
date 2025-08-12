@@ -1,0 +1,22 @@
+services:
+  couchdb:
+    build: .
+    container_name: obsidian-livesync-coolify
+    environment:
+      - COUCHDB_USER=${COUCHDB_USER:-admin}
+      - COUCHDB_PASSWORD=${COUCHDB_PASSWORD}
+    volumes:
+      - couchdb_data:/opt/couchdb/data
+    restart: unless-stopped
+    labels:
+      - coolify.managed=true
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5984/_up"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+volumes:
+  couchdb_data:
+    driver: local
