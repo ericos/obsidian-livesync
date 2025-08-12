@@ -18,9 +18,9 @@ RUN chown -R couchdb:couchdb /opt/couchdb/data && \
 # Expose port
 EXPOSE 5984
 
-# Add health check
+# Add health check with authentication
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-  CMD curl -f http://localhost:5984/_up || exit 1
+  CMD curl -f http://${COUCHDB_USER}:${COUCHDB_PASSWORD}@localhost:5984/_up || exit 1
 
 # Use the default CouchDB entrypoint
 ENTRYPOINT ["/docker-entrypoint.sh"]
