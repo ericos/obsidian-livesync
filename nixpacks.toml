@@ -1,0 +1,11 @@
+[build]
+# Use Docker Compose for build
+buildCommand = "echo 'Using Docker Compose'"
+
+[start]
+# Use Docker Compose to start the application
+cmd = "docker-compose up"
+
+[variables]
+# Environment variables for the build process
+PORT = "5984"
