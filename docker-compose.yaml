@@ -14,6 +14,10 @@ services:
     restart: unless-stopped
     labels:
       - coolify.managed=true
+      - traefik.enable=true
+      - traefik.http.routers.couchdb.rule=Host(`${SERVICE_FQDN_COUCHDB}`)
+      - traefik.http.routers.couchdb.tls=true
+      - traefik.http.services.couchdb.loadbalancer.server.port=5984
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:5984/_up"]
       interval: 30s
