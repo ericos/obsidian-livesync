@@ -1,4 +1,4 @@
-FROM couchdb:latest
+FROM couchdb:3.5.1
 
 # Create necessary directories
 RUN mkdir -p /opt/couchdb/data && \
